@@ -1,0 +1,29 @@
+AppBundle\Entity\FilmText:
+    type: entity
+    table: film_text
+    indexes:
+        idx_title_description:
+            columns:
+                - title
+                - description
+    id:
+        filmId:
+            type: smallint
+            nullable: false
+            unsigned: true
+            id: true
+            column: film_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        title:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        description:
+            type: text
+            nullable: true
+            length: 65535
+            fixed: false
+    lifecycleCallbacks: {  }

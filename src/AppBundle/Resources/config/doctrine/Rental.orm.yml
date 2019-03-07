@@ -1,0 +1,71 @@
+AppBundle\Entity\Rental:
+    type: entity
+    table: rental
+    indexes:
+        idx_fk_inventory_id:
+            columns:
+                - inventory_id
+        idx_fk_customer_id:
+            columns:
+                - customer_id
+        idx_fk_staff_id:
+            columns:
+                - staff_id
+    uniqueConstraints:
+        idx_rental:
+            columns:
+                - rental_date
+                - inventory_id
+                - customer_id
+    id:
+        rentalId:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            column: rental_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        rentalDate:
+            type: datetime
+            nullable: false
+            column: rental_date
+        returnDate:
+            type: datetime
+            nullable: true
+            column: return_date
+        lastUpdate:
+            type: datetime
+            nullable: false
+            default: CURRENT_TIMESTAMP
+            column: last_update
+    manyToOne:
+        customer:
+            targetEntity: Customer
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                customer_id:
+                    referencedColumnName: customer_id
+            orphanRemoval: false
+        inventory:
+            targetEntity: Inventory
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                inventory_id:
+                    referencedColumnName: inventory_id
+            orphanRemoval: false
+        staff:
+            targetEntity: Staff
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                staff_id:
+                    referencedColumnName: staff_id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

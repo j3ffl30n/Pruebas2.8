@@ -1,0 +1,121 @@
+AppBundle\Entity\Film:
+    type: entity
+    table: film
+    indexes:
+        idx_title:
+            columns:
+                - title
+        idx_fk_language_id:
+            columns:
+                - language_id
+        idx_fk_original_language_id:
+            columns:
+                - original_language_id
+    id:
+        filmId:
+            type: smallint
+            nullable: false
+            unsigned: true
+            id: true
+            column: film_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        title:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        description:
+            type: text
+            nullable: true
+            length: 65535
+            fixed: false
+        releaseYear:
+            type: date
+            nullable: true
+            column: release_year
+        rentalDuration:
+            type: boolean
+            nullable: false
+            default: '3'
+            column: rental_duration
+        rentalRate:
+            type: decimal
+            nullable: false
+            precision: 4
+            scale: 2
+            default: '4.99'
+            column: rental_rate
+        length:
+            type: smallint
+            nullable: true
+            unsigned: true
+        replacementCost:
+            type: decimal
+            nullable: false
+            precision: 5
+            scale: 2
+            default: '19.99'
+            column: replacement_cost
+        rating:
+            type: string
+            nullable: true
+            length: null
+            fixed: false
+            default: G
+        specialFeatures:
+            type: string
+            nullable: true
+            length: null
+            fixed: false
+            column: special_features
+        lastUpdate:
+            type: datetime
+            nullable: false
+            default: CURRENT_TIMESTAMP
+            column: last_update
+    manyToOne:
+        language:
+            targetEntity: Language
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                language_id:
+                    referencedColumnName: language_id
+            orphanRemoval: false
+        originalLanguage:
+            targetEntity: Language
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                original_language_id:
+                    referencedColumnName: language_id
+            orphanRemoval: false
+    manyToMany:
+        actor:
+            targetEntity: Actor
+            cascade: {  }
+            mappedBy: film
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+        category:
+            targetEntity: Category
+            cascade: {  }
+            mappedBy: null
+            inversedBy: film
+            joinTable:
+                name: film_category
+                joinColumns:
+                    -
+                        name: film_id
+                        referencedColumnName: film_id
+                inverseJoinColumns:
+                    -
+                        name: category_id
+                        referencedColumnName: category_id
+            orderBy: null
+    lifecycleCallbacks: {  }

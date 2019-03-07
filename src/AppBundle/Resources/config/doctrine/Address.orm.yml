@@ -1,0 +1,59 @@
+AppBundle\Entity\Address:
+    type: entity
+    table: address
+    indexes:
+        idx_fk_city_id:
+            columns:
+                - city_id
+    id:
+        addressId:
+            type: smallint
+            nullable: false
+            unsigned: true
+            id: true
+            column: address_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        address:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+        address2:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+        district:
+            type: string
+            nullable: false
+            length: 20
+            fixed: false
+        postalCode:
+            type: string
+            nullable: true
+            length: 10
+            fixed: false
+            column: postal_code
+        phone:
+            type: string
+            nullable: false
+            length: 20
+            fixed: false
+        lastUpdate:
+            type: datetime
+            nullable: false
+            default: CURRENT_TIMESTAMP
+            column: last_update
+    manyToOne:
+        city:
+            targetEntity: City
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                city_id:
+                    referencedColumnName: city_id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

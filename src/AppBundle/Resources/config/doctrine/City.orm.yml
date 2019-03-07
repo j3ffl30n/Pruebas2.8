@@ -1,0 +1,38 @@
+AppBundle\Entity\City:
+    type: entity
+    table: city
+    indexes:
+        idx_fk_country_id:
+            columns:
+                - country_id
+    id:
+        cityId:
+            type: smallint
+            nullable: false
+            unsigned: true
+            id: true
+            column: city_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        city:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+        lastUpdate:
+            type: datetime
+            nullable: false
+            default: CURRENT_TIMESTAMP
+            column: last_update
+    manyToOne:
+        country:
+            targetEntity: Country
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                country_id:
+                    referencedColumnName: country_id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

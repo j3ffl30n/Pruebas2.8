@@ -1,0 +1,24 @@
+AppBundle\Entity\Country:
+    type: entity
+    table: country
+    id:
+        countryId:
+            type: smallint
+            nullable: false
+            unsigned: true
+            id: true
+            column: country_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        country:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+        lastUpdate:
+            type: datetime
+            nullable: false
+            default: CURRENT_TIMESTAMP
+            column: last_update
+    lifecycleCallbacks: {  }

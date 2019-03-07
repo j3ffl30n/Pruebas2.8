@@ -1,0 +1,49 @@
+AppBundle\Entity\Inventory:
+    type: entity
+    table: inventory
+    indexes:
+        idx_fk_film_id:
+            columns:
+                - film_id
+        idx_store_id_film_id:
+            columns:
+                - store_id
+                - film_id
+        fk_inventory_store_idx:
+            columns:
+                - store_id
+    id:
+        inventoryId:
+            type: integer
+            nullable: false
+            unsigned: true
+            id: true
+            column: inventory_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        lastUpdate:
+            type: datetime
+            nullable: false
+            default: CURRENT_TIMESTAMP
+            column: last_update
+    manyToOne:
+        film:
+            targetEntity: Film
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                film_id:
+                    referencedColumnName: film_id
+            orphanRemoval: false
+        store:
+            targetEntity: Store
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                store_id:
+                    referencedColumnName: store_id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

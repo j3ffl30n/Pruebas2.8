@@ -1,0 +1,23 @@
+AppBundle\Entity\Language:
+    type: entity
+    table: language
+    id:
+        languageId:
+            type: boolean
+            nullable: false
+            id: true
+            column: language_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 20
+            fixed: true
+        lastUpdate:
+            type: datetime
+            nullable: false
+            default: CURRENT_TIMESTAMP
+            column: last_update
+    lifecycleCallbacks: {  }

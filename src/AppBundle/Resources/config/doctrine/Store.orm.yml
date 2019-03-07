@@ -1,0 +1,45 @@
+AppBundle\Entity\Store:
+    type: entity
+    table: store
+    indexes:
+        idx_fk_address_id:
+            columns:
+                - address_id
+    uniqueConstraints:
+        idx_unique_manager:
+            columns:
+                - manager_staff_id
+    id:
+        storeId:
+            type: boolean
+            nullable: false
+            id: true
+            column: store_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        lastUpdate:
+            type: datetime
+            nullable: false
+            default: CURRENT_TIMESTAMP
+            column: last_update
+    manyToOne:
+        address:
+            targetEntity: Address
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                address_id:
+                    referencedColumnName: address_id
+            orphanRemoval: false
+        managerStaff:
+            targetEntity: Staff
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                manager_staff_id:
+                    referencedColumnName: staff_id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,52 @@
+AppBundle\Entity\Actor:
+    type: entity
+    table: actor
+    indexes:
+        idx_actor_last_name:
+            columns:
+                - last_name
+    id:
+        actorId:
+            type: smallint
+            nullable: false
+            unsigned: true
+            id: true
+            column: actor_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        firstName:
+            type: string
+            nullable: false
+            length: 45
+            fixed: false
+            column: first_name
+        lastName:
+            type: string
+            nullable: false
+            length: 45
+            fixed: false
+            column: last_name
+        lastUpdate:
+            type: datetime
+            nullable: false
+            default: CURRENT_TIMESTAMP
+            column: last_update
+    manyToMany:
+        film:
+            targetEntity: Film
+            cascade: {  }
+            mappedBy: null
+            inversedBy: actor
+            joinTable:
+                name: film_actor
+                joinColumns:
+                    -
+                        name: actor_id
+                        referencedColumnName: actor_id
+                inverseJoinColumns:
+                    -
+                        name: film_id
+                        referencedColumnName: film_id
+            orderBy: null
+    lifecycleCallbacks: {  }

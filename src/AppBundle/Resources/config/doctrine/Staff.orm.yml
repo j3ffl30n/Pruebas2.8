@@ -1,0 +1,80 @@
+AppBundle\Entity\Staff:
+    type: entity
+    table: staff
+    indexes:
+        idx_fk_store_id:
+            columns:
+                - store_id
+        idx_fk_address_id:
+            columns:
+                - address_id
+    id:
+        staffId:
+            type: boolean
+            nullable: false
+            id: true
+            column: staff_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        firstName:
+            type: string
+            nullable: false
+            length: 45
+            fixed: false
+            column: first_name
+        lastName:
+            type: string
+            nullable: false
+            length: 45
+            fixed: false
+            column: last_name
+        picture:
+            type: blob
+            nullable: true
+            length: 65535
+            fixed: false
+        email:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+        active:
+            type: boolean
+            nullable: false
+            default: '1'
+        username:
+            type: string
+            nullable: false
+            length: 16
+            fixed: false
+        password:
+            type: string
+            nullable: true
+            length: 40
+            fixed: false
+        lastUpdate:
+            type: datetime
+            nullable: false
+            default: CURRENT_TIMESTAMP
+            column: last_update
+    manyToOne:
+        address:
+            targetEntity: Address
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                address_id:
+                    referencedColumnName: address_id
+            orphanRemoval: false
+        store:
+            targetEntity: Store
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                store_id:
+                    referencedColumnName: store_id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

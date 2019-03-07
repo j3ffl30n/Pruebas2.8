@@ -1,0 +1,66 @@
+AppBundle\Entity\Payment:
+    type: entity
+    table: payment
+    indexes:
+        idx_fk_staff_id:
+            columns:
+                - staff_id
+        idx_fk_customer_id:
+            columns:
+                - customer_id
+        fk_payment_rental_idx:
+            columns:
+                - rental_id
+    id:
+        paymentId:
+            type: smallint
+            nullable: false
+            unsigned: true
+            id: true
+            column: payment_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        amount:
+            type: decimal
+            nullable: false
+            precision: 5
+            scale: 2
+        paymentDate:
+            type: datetime
+            nullable: false
+            column: payment_date
+        lastUpdate:
+            type: datetime
+            nullable: true
+            default: CURRENT_TIMESTAMP
+            column: last_update
+    manyToOne:
+        customer:
+            targetEntity: Customer
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                customer_id:
+                    referencedColumnName: customer_id
+            orphanRemoval: false
+        rental:
+            targetEntity: Rental
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                rental_id:
+                    referencedColumnName: rental_id
+            orphanRemoval: false
+        staff:
+            targetEntity: Staff
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                staff_id:
+                    referencedColumnName: staff_id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
