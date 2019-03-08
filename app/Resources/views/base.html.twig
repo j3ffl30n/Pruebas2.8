@@ -3,11 +3,35 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+
+        {% block stylesheets %}
+            {% stylesheets filter="cssrewrite" output="css/app_2.css"
+                "assets/css/*.css"
+                "bundles/sonatacore/vendor/bootstrap/dist/css/*.css"
+                "bundles/sonatacore/vendor/select2/select2.css"
+                "assets/css/blocks/welcome_block.css"
+            %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+
+            {% stylesheets filter="scssphp" output="css/app_23.css"
+                "assets/scss/base.scss"
+            %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+        {% block javascripts %}
+            {% javascripts filter="?jsqueeze" output="js/app_2.js"
+                "bundles/sonatacore/vendor/jquery/dist/jquery.min.js"
+            %}
+                <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
     </body>
 </html>
