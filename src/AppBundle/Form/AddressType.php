@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CustomerType extends AbstractType
+class AddressType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,14 +15,13 @@ class CustomerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName')
-            ->add('lastName')
-            ->add('email')
-            ->add('active')
-            ->add('createDate', 'datetime')
-            ->add('lastUpdate', 'datetime')
             ->add('address')
-            ->add('store')
+            ->add('address2')
+            ->add('district')
+            ->add('postalCode')
+            ->add('phone')
+            ->add('lastUpdate', 'datetime')
+            ->add('city')
         ;
     }
     
@@ -32,7 +31,7 @@ class CustomerType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Customer'
+            'data_class' => 'AppBundle\Entity\Address'
         ));
     }
 }

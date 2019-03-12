@@ -2,3 +2,7 @@ app_customer:
     resource: "@AppBundle/Resources/config/routing/customer.yml"
     prefix:   /customer
 
+app_address:
+    resource: "@AppBundle/Resources/config/routing/address.yml"
+    prefix:   /address
+

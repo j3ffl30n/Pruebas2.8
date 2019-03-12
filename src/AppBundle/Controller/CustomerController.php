@@ -20,6 +20,18 @@ class CustomerController extends Controller
      */
     public function indexAction()
     {
+
+        $url = "https://restcountries.eu/rest/v2/all";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+        var_dump(json_decode($output));
+
+
+
+die;
         $em = $this->getDoctrine()->getManager();
 
         $customers = $em->getRepository('AppBundle:Customer')->findAll();
